@@ -47,11 +47,7 @@ class_colors_rgb = {
 }
 
 standard_dimensions = {
-    0: [1.50, 1.87, 4.00],  # Car
-    1: [2.90, 2.50, 8.50],   # Truck
-    2: [1.70, 0.60, 0.80],   # Pedestrian
-    3: [1.70, 0.75, 1.85],   # Cyclist
-    4: [3.40, 2.50, 12.00]   # Tram
+    0: [1.64, 1.52, 3.86],  # Car h,w,l
 }
 
 ground_truth_remap = {
@@ -369,7 +365,7 @@ class LidarCameraFusion:
 # -------------------------------
 # Centroid-Based Cluster Merging
 # -------------------------------
-def merge_close_clusters(cluster_points, cluster_classes, distance_threshold=2.0):
+def merge_close_clusters(cluster_points, cluster_classes, distance_threshold=1.0):
     centroids = []
     for points in cluster_points:
         centroids.append(np.mean(points[:, :3], axis=0))
@@ -564,7 +560,7 @@ class EvaluationMetrics:
         self.detected_distances = {cls: [] for cls in self.classes}
         self.gt_distances = {cls: [] for cls in self.classes}
         
-        # For PR curves - store predictions with their IoU scores and binary labels
+        # store predictions with their IoU scores and binary labels
         self.prediction_scores = {cls: [] for cls in self.classes}
         self.prediction_labels = {cls: [] for cls in self.classes}
         
@@ -776,10 +772,10 @@ def evaluate_pipeline(dataset_path, results_path, model_path, classes_to_evaluat
 # Run Evaluation
 # -------------------------------
 if __name__ == "__main__":
-    DATASET_PATH = "G:/EM/Sem-7 Thesis/code/Data/training"
-    RESULTS_PATH = "G:/EM/Sem-7 Thesis/code/results/iou_dbscan_evaluation"
-    MODEL_PATH = "yolo11s-seg.pt"
-    CLASSES_TO_EVALUATE = ['Car', 'Truck', 'Pedestrian', 'Cyclist', 'Tram']
+    DATASET_PATH = "G:/EM/Sem-7 Thesis/code/Data/training"  #file path to the dataset
+    RESULTS_PATH = "G:/EM/Sem-7 Thesis/code/results/iou_dbscan_evaluation"  # file path to save results
+    MODEL_PATH = "yolo11s-seg.pt"  # file path to the YOLO model for segmentation
+    CLASSES_TO_EVALUATE = ['Car', 'Truck', 'Pedestrian', 'Cyclist', 'Tram']  # classes to evaluate
     IOU_THRESHOLD = 0.01
     MAX_IMAGES = None
     
