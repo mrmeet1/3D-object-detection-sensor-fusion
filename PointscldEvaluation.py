@@ -10,8 +10,8 @@ from sklearn.cluster import DBSCAN
 
 # CONFIG
 data_root = Path("Data") / "training"
-model_path = r"G:\EM\Sem-7 Thesis\code\yolo11s-seg.pt"
-out_root = Path(r"G:\EM\Sem-7 Thesis\code\results\DBSCAN_only_10")
+model_path = r"path to model\yolo11s-seg.pt"
+out_root = Path(r"result path")
 conf_thr = 0.35
 mask_thr = 0.35
 
